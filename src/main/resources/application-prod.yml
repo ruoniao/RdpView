@@ -1,0 +1,17 @@
+server:
+  port: 8082
+debug: false
+spring:
+  mvc:
+    static-path-pattern: /static/**
+    favicon:
+      enabled: false
+logging:
+  level:
+    com.ruoniao: debug
+  pattern:
+    console: "%d - %msg%n"
+  file: "log/spring.log"
+guacamole:
+  ip: "127.0.0.1"
+  port: 4822

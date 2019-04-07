@@ -1,0 +1,31 @@
+debug: true
+server:
+  port: 8082
+  tomcat:
+    remote-ip-header: x-forwarded-for
+    protocol-header: x-forwarded-proto
+    port-header: X-Forwarded-Port
+  use-forward-headers: true
+  compression:
+    enabled: true
+    mime-types:
+      - application/json
+      - application/xml
+      - text/html
+      - text/xml
+      - text/plain
+
+spring:
+  mvc:
+    static-path-pattern: /static/**
+    favicon:
+      enabled: false
+logging:
+  level:
+    com.ruoniao: debug
+  pattern:
+    console: "%d - %msg%n"
+  file: "log/spring.log"
+guacamole:
+  ip: "127.0.0.1"
+  port: 4822

@@ -6,8 +6,8 @@
 
 - docker安装：
 
-> docker run -d --name rdpview --network=host --restart=always -v /log:/log ruoniao/edu
-> docker run -d --name guacd--network=host --restart=always  guacamole/guacd
+docker run -d --name rdpview --network=host --restart=always -v /log:/log ruoniao/edu
+docker run -d --name guacd--network=host --restart=always  guacamole/guacd
 
 
 

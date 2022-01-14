@@ -1,6 +1,7 @@
 package com.education.config;
 
 import com.education.servlet.RdpServlet;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,11 +13,13 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class MyServletConfig {
+
     @Bean
     //注册servlet组件
-    public ServletRegistrationBean myServlet(){
-        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new RdpServlet(),
-                "/rdpview/*");
-        return servletRegistrationBean;
+    public ServletRegistrationBean<RdpServlet> rdpServlet(
+            @Value("${guacd.host}") String host,
+            @Value("${guacd.port}") Integer port
+    ) {
+        return new ServletRegistrationBean<>(new RdpServlet(host, port), "/rdpview/*");
     }
 }

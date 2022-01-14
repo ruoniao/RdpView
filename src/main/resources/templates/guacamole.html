@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>360考试认证平台</title>
+    <title>快贸-远程桌面</title>
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
 </head>
 
@@ -16,24 +16,20 @@
 
 <!-- Init -->
 <script th:inline="javascript"> /* <![CDATA[ */
-var http_tunnel = [[${base_url}]];
+const http_tunnel = [[${base_url}]];
 // Get display div from document
-var display = document.getElementById("display");
+const display = document.getElementById("display");
 // Instantiate client, using an HTTP tunnel for communications.
-
-var guac = new Guacamole.Client(
-    new Guacamole.HTTPTunnel(http_tunnel)
-);
+const gugClient = new Guacamole.Client(new Guacamole.HTTPTunnel(http_tunnel));
 
 // Add client to display div
-display.appendChild(guac.getDisplay().getElement());
+display.appendChild(gugClient.getDisplay().getElement());
 
 // Error handler
-guac.onerror = function (error) {
+gugClient.onerror = function (error) {
     if (error.code === 519) {
         alert("连接失败,请联系管理员");
-    }
-    else if (error.code === 521)
+    } else if (error.code === 521)
         alert("此主机已从其他终端登录");
     else
         alert("连接失败,请联系管理员");
@@ -41,11 +37,11 @@ guac.onerror = function (error) {
 };
 
 // Connect
-guac.connect();
+gugClient.connect();
 
 // Disconnect on close
 window.onunload = function () {
-    guac.disconnect();
+    gugClient.disconnect();
 }
 
 /* ]]> */ </script>
@@ -54,36 +50,33 @@ window.onunload = function () {
 <script type="text/javascript"> /* <![CDATA[ */
 
 // Mouse
-var mouse = new Guacamole.Mouse(guac.getDisplay().getElement());
+const mouse = new Guacamole.Mouse(gugClient.getDisplay().getElement());
 
 mouse.onmousedown =
     mouse.onmouseup =
         mouse.onmousemove = function (mouseState) {
-            guac.sendMouseState(mouseState);
+            gugClient.sendMouseState(mouseState);
         };
 
-
 // Keyboard
-var keyboard = new Guacamole.Keyboard(document);
+const keyboard = new Guacamole.Keyboard(document);
 
 keyboard.onkeydown = function (keysym) {
-    guac.sendKeyEvent(1, keysym);
+    gugClient.sendKeyEvent(1, keysym);
 };
 
 keyboard.onkeyup = function (keysym) {
-    guac.sendKeyEvent(0, keysym);
+    gugClient.sendKeyEvent(0, keysym);
 };
 
 /* ]]> */ </script>
 
 <script type="text/javascript">
     //提取到函数外面作为全局变量
-    var rm = document.getElementById("display");
-
+    const rm = document.getElementById("display");
     //自定义一个浏览器右键菜单，单击右键是显示它
     //oncontextmenu上下文菜单事件，右键菜单
     rm.oncontextmenu = function (e) {
-
         //阻止默认的右键菜单显示
         return false;
     };

@@ -1,6 +1,6 @@
 package com.education.config;
 
-import com.education.servlet.Myservlet;
+import com.education.servlet.RdpServlet;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +15,7 @@ public class MyServletConfig {
     @Bean
     //注册servlet组件
     public ServletRegistrationBean myServlet(){
-        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new Myservlet(),
+        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new RdpServlet(),
                 "/rdpview/*");
         return servletRegistrationBean;
     }

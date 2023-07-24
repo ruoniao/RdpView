@@ -12,6 +12,6 @@ logging:
   pattern:
     console: "%d - %msg%n"
   file: "log/spring.log"
-guacamole:
-  ip: "127.0.0.1"
+guacd:
+  host: "127.0.0.1"
   port: 4822
